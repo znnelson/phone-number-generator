@@ -1,0 +1,19 @@
+<div *ngIf="show" class="list-view">
+<div>
+    <label>Page Size</label>
+    <select [(ngModel)]="pageSize" (change)="onPageSizeChange($event.target.value)">
+        <option *ngFor="let x of pageSizeOptions">{{x}}</option>
+    </select>
+    <label>Page Number: </label>
+    <button (click)="onPageChange(-1)">Previous</button>
+    <span>{{pageNumber}}</span>
+    <button (click)="onPageChange(1)">Next</button>
+    
+</div>
+<div>
+    <table>
+        <tr><th>Number</th><th>Phone Number</th></tr>
+        <tr *ngFor="let n of phoneNumberList; index as i "><td>{{i+1+(pageNumber-1)*pageSize}}</td><td>{{n.phoneNumber}}</td></tr>
+    </table>
+</div>
+</div>

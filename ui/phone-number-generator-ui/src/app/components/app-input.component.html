@@ -1,0 +1,33 @@
+<div class="input-page"> 
+<br/>
+<div class="api-status">
+    <label>API service status: </label>
+    <span *ngIf="!statusCheck"> Checking....</span>
+    <span> {{text | async}}</span>
+</div>
+
+
+<div class="phone-number-input">
+    <form ngNativeValidate [formGroup]="checkPhoneNumberForm" (ngSubmit)="onSubmit(checkPhoneNumberForm.value)">
+        <div class="form-body">
+            <div>
+                <label for="phoneNumber">
+                Phone Number: 
+                </label>
+                <input id="phoneNumber" type="tel" formControlName="phoneNumber" required pattern="[0-9]{7}|[0-9]{10}">
+            </div>
+        
+            <button class="button" type="submit">Check</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="phoneNumberValidation.isValid" class="summary">
+    <span style="display: block">This is a valid phone number!</span>
+    <span style="display: block">The total number of combinations generated from this phone number is: {{phoneNumberValidation.totalCombination}}</span>
+    <button class="button" (click)="onShowCombinations()">Show Combinations</button>
+</div>
+
+<app-paged-list [phoneNumber]="checkPhoneNumberForm.value.phoneNumber"></app-paged-list>
+
+</div>
